@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # ── Frontend ────────────────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend-vite/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: frontend-vite
+
+      - name: Build frontend
+        run: npm run build
+        working-directory: frontend-vite
+
+      # ── Backend ─────────────────────────────────────────────────────────────
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - name: Build Go (Linux AMD64)
+        env:
+          CGO_ENABLED: 0
+          GOOS: linux
+          GOARCH: amd64
+        run: go build -o devtools-linux-amd64 .
+
+      # ── Artifact ────────────────────────────────────────────────────────────
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: devtools-linux-amd64
+          path: |
+            devtools-linux-amd64
+            frontend-vite/dist/
+          retention-days: 7
