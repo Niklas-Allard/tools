@@ -58,6 +58,7 @@ const route = useRoute()
 const tools: Record<string, { name: string }> = {
   ytdl: { name: 'YouTube Downloader' },
   qrcode: { name: 'QR Code Generator' },
+  'file-converter': { name: 'File Converter' },
 }
 
 const currentTool = computed(() => {

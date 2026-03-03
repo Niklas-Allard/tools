@@ -19,6 +19,11 @@ const router = createRouter({
       name: 'qrcode',
       component: () => import('@/views/QrcodeView.vue'),
     },
+    {
+      path: '/file-converter',
+      name: 'file-converter',
+      component: () => import('@/views/FileConverterView.vue'),
+    },
   ],
 })
 

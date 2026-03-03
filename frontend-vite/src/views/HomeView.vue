@@ -73,7 +73,16 @@ const tools = [
     description: 'QR Codes aus URLs, Text oder Kontakten generieren.',
     badge: 'Neu',
     badgeClass: 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-400',
-  }
+  },
+  {
+    id: 'file-converter',
+    icon: '🎞️',
+    iconBg: 'bg-violet-100 dark:bg-violet-950',
+    name: 'File Converter',
+    description: 'Video & Audio im Browser konvertieren: MP4, WebM, GIF, MP3, WAV — 100% lokal per FFmpeg.wasm.',
+    badge: 'Neu',
+    badgeClass: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400',
+  },
   // Weitere Tools hier eintragen:
   // {
   //   id: 'qrcode',
