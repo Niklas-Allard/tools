@@ -851,7 +851,7 @@ function handleDrop(e: DragEvent): void {
   if (!files || files.length === 0) return
   if (batchMode.value) {
     addToBatch(files)
-  } else if (files.length === 1) {
+  } else if (files.length === 1 && files[0]) {
     processFile(files[0])
   } else {
     // Multiple files dropped in non-batch mode → auto-enable batch
@@ -867,7 +867,7 @@ function handleFileInput(e: Event): void {
   if (batchMode.value || files.length > 1) {
     batchMode.value = true
     addToBatch(files)
-  } else {
+  } else if (files[0]) {
     processFile(files[0])
   }
   input.value = ''
@@ -908,7 +908,7 @@ function makeFileList(f: File): FileList {
 
 function removeBatchItem(id: string): void {
   const idx = batchFiles.value.findIndex(b => b.id === id)
-  if (idx >= 0) {
+  if (idx >= 0 && batchFiles.value[idx]) {
     URL.revokeObjectURL(batchFiles.value[idx].url)
     batchFiles.value.splice(idx, 1)
   }
