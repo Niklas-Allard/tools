@@ -1,9 +1,21 @@
 import path from 'node:path'
-import { defineConfig } from 'vite'
+import { defineConfig, type Plugin, type ViteDevServer } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+
+const coiHeaders: Plugin = {
+  name: 'coi-headers',
+  configureServer(server: ViteDevServer) {
+    server.middlewares.use((req, res, next) => {
+      res.setHeader('Cross-Origin-Opener-Policy', 'same-origin')
+      res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp')
+      res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin') // für CDN okay
+      next()
+    })
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,7 +23,8 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     tailwindcss(), 
-    tsconfigPaths()
+    tsconfigPaths(),
+    coiHeaders
   ],
   resolve: {
     alias: {
