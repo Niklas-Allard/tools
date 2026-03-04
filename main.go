@@ -24,12 +24,21 @@ func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
 
+	// COOP/COEP Middleware – WICHTIG: vor Static!
+	r.Use(func(c *gin.Context) {
+		c.Header("Cross-Origin-Opener-Policy", "same-origin")
+		c.Header("Cross-Origin-Embedder-Policy", "require-corp")
+		c.Header("Cross-Origin-Resource-Policy", "cross-origin") // CDN
+		c.Next()
+	})
+
 	api.SetupRoutes(r, db)
 
 	// Serve frontend
 	r.Static("/assets", "./frontend-vite/dist/assets")
 	r.StaticFile("/favicon.ico", "./frontend-vite/dist/favicon.ico")
 	r.NoRoute(func(c *gin.Context) {
+		c.Header("Content-Type", "text/html; charset=utf-8") // Explizit
 		c.File("./frontend-vite/dist/index.html")
 	})
 
