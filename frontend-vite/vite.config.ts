@@ -55,6 +55,14 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
+    // FFmpeg WASM modules must be served as raw ES modules without Vite
+    // pre-bundling; they use dynamic imports + SharedArrayBuffer internally.
     exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
+  },
+  build: {
+    // esnext is required for top-level await and BigInt64Array used by the
+    // FFmpeg WASM core. All modern browsers (Chrome 89+, Firefox 89+,
+    // Safari 15+) support this target.
+    target: 'esnext',
   },
 })
