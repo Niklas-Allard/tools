@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'file-converter',
       component: () => import('@/views/FileConverterView.vue'),
     },
+    {
+      path: '/md-pdf',
+      name: 'md-pdf',
+      component: () => import('@/views/MdPdfView.vue'),
+    },
   ],
 })
 

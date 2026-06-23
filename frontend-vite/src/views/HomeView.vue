@@ -83,6 +83,15 @@ const tools = [
     badge: 'Neu',
     badgeClass: 'bg-violet-100 text-violet-700 dark:bg-violet-950 dark:text-violet-400',
   },
+  {
+    id: 'md-pdf',
+    icon: '📄',
+    iconBg: 'bg-emerald-100 dark:bg-emerald-950',
+    name: 'Markdown → PDF',
+    description: 'MD mit Mermaid-Diagrammen, KaTeX/LaTeX, Admonitions, TOC, Wikilinks und Syntax-Highlighting zu PDF exportieren.',
+    badge: 'Neu',
+    badgeClass: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400',
+  },
   // Weitere Tools hier eintragen:
   // {
   //   id: 'qrcode',

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"devtools/tools/mdpdf"
 	"devtools/tools/qrcode"
 	"devtools/tools/ytdl"
 
@@ -15,4 +16,5 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 
 	ytdl.RegisterRoutes(api.Group("/ytdl"), db)
 	qrcode.RegisterRoutes(api.Group("/qrcode"), db)
+	mdpdf.RegisterRoutes(api.Group("/mdpdf"))
 }
